@@ -3,7 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { createEpicMiddleware } from 'redux-observable';
 import { routerMiddleware } from 'connected-react-router';
 import logger from 'redux-logger';
-import rootReducer from './reducers';
+import rootReducer from './slices/reducers';
 import rootEpic from './epics';
 
 export const history = createBrowserHistory();
