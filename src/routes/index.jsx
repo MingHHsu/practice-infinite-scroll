@@ -5,6 +5,6 @@ import ScenicSpotRoute from './ScenicSpotRoute';
 export default () => (
   <Switch>
     <Route exact path="/" render={() => <Redirect to="/scenicSpot" />} />
-    <ScenicSpotRoute exact path={['/scenicSpot', '/scenicSpot/:city']} component={<div>Scenic Spot</div>} />
+    <ScenicSpotRoute exact path={['/scenicSpot', '/scenicSpot/:city']} component={() => <div>Scenic Spot</div>} />
   </Switch>
 );
