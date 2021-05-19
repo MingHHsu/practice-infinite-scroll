@@ -21,6 +21,6 @@ export default ({
     observer.next(res);
     observer.complete();
   } catch (error) {
-    observer.error();
+    observer.error(error);
   }
 });
