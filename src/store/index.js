@@ -19,6 +19,7 @@ export default (preloadedState) => {
       epicMiddleware,
       ...getDefaultMiddleware({
         thunk: false,
+        serializableCheck: false,
       }),
     ].filter(Boolean),
     preloadedState,
