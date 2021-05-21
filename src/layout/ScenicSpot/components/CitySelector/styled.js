@@ -3,8 +3,15 @@ import { Link } from 'react-router-dom';
 import { Select as Selector, MenuItem, Button } from '@material-ui/core';
 
 export const SelectWrapper = styled.div`
+  width: 100%;
+  height: 60px;
+  position: fixed;
+  top: 60px;
   display: flex;
   align-items: center;
+  margin-left: auto;
+  background-color: #fff;
+  z-index: 900;
 `;
 
 export const Label = styled.label`
