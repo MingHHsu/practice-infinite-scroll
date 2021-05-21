@@ -11,12 +11,19 @@ export default function ScenicSpotRoute({
 }) {
   const cities = useSelector((state) => state.cities);
   const renderComponent = ({ match }) => {
-    if (match?.path === '/scenicSpot/:city' && !cities.enum.some((city) => city === match?.params?.city)) {
+    const listByCity = match?.path === '/scenicSpot/:city';
+    if (listByCity && !cities.enum.some((city) => city === match?.params?.city)) {
       return <Redirect to="/scenicSpot" />;
     }
     return (
       <ScenicSpotLayout cities={cities}>
-        <Component />
+        <Component
+          listByCity={listByCity}
+          city={listByCity && {
+            enName: match?.params?.city,
+            twName: cities['x-enum'][match?.params?.city],
+          }}
+        />
       </ScenicSpotLayout>
     );
   };
