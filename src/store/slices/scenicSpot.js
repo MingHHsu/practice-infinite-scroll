@@ -5,11 +5,14 @@ const initialState = {
   getScenicSpot: {
     isRequesting: false,
     error: null,
+    noMoreScenicSpot: false,
     data: [],
   },
   getScenicSpotByCity: {
     isRequesting: false,
     error: null,
+    noMoreScenicSpot: false,
+    city: '',
     data: [],
   },
 };
@@ -30,7 +33,11 @@ const { actions, reducer } = createSlice({
       return mergeDeepRight(state, {
         getScenicSpot: {
           isRequesting: false,
-          data,
+          noMoreScenicSpot: data.length < 30,
+          data: [
+            ...state.getScenicSpot.data,
+            ...data,
+          ],
         },
       });
     },
@@ -41,6 +48,19 @@ const { actions, reducer } = createSlice({
           error: action.payload.error,
         },
       });
+    },
+    selectAnotherCity(state, action) {
+      const currentCity = state.getScenicSpotByCity.city;
+      const selectedCity = action.payload.city;
+      if (currentCity !== selectedCity) {
+        return mergeDeepRight(state, {
+          getScenicSpotByCity: {
+            city: action.payload.city,
+            data: [],
+          },
+        });
+      }
+      return { ...state };
     },
     requestGetScenicSpotByCity(state) {
       return mergeDeepRight(state, {
@@ -54,7 +74,11 @@ const { actions, reducer } = createSlice({
       return mergeDeepRight(state, {
         getScenicSpotByCity: {
           isRequesting: false,
-          data,
+          noMoreScenicSpot: data.length < 30,
+          data: [
+            ...state.getScenicSpotByCity.data,
+            ...data,
+          ],
         },
       });
     },
@@ -73,6 +97,7 @@ export const {
   requestGetScenicSpot,
   receivedGetScenicSpot,
   receivedErrorGetScenicSpot,
+  selectAnotherCity,
   requestGetScenicSpotByCity,
   receivedGetScenicSpotByCity,
   receivedErrorGetScenicSpotByCity,
