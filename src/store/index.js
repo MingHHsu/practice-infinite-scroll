@@ -2,7 +2,7 @@ import { createBrowserHistory } from 'history';
 import { configureStore } from '@reduxjs/toolkit';
 import { createEpicMiddleware } from 'redux-observable';
 import { routerMiddleware } from 'connected-react-router';
-import logger from 'redux-logger';
+import { createLogger } from 'redux-logger';
 import rootReducer from './slices/reducers';
 import rootEpic from './epics';
 
@@ -14,7 +14,9 @@ export default (preloadedState) => {
   const store = configureStore({
     reducer: rootReducer(history),
     middleware: (getDefaultMiddleware) => [
-      isEnvDevelopment && logger,
+      isEnvDevelopment && createLogger({
+        collapsed: true,
+      }),
       routerMiddleware(history),
       epicMiddleware,
       ...getDefaultMiddleware({
