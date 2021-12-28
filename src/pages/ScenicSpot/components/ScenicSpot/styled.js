@@ -29,7 +29,7 @@ export const ScenicSpotCardContent = styled(CardContent)`
   color: #fff;
 `;
 
-export const ScenicSpotName = styled(Typography)`
+export const ScenicSpotTitle = styled(Typography)`
   color: #fff;
 `;
 

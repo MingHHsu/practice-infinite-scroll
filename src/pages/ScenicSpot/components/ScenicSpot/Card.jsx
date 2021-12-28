@@ -7,14 +7,14 @@ import {
   ScenicSpotCardContent,
   ScenicSpotCity,
   ScenicSpotOpenTime,
-  ScenicSpotName,
+  ScenicSpotTitle,
   ScenicSpotDescriptionDetail,
   ScenicSpotCardSubTitle,
   ScenicSpotCardSubTitleWrapper,
 } from './styled';
 
 function Card({
-  Name,
+  ScenicSpotName,
   DescriptionDetail,
   Phone,
   Address,
@@ -24,9 +24,9 @@ function Card({
   return (
     <ScenicSpotCard>
       <ScenicSpotCardContent>
-        <ScenicSpotName variant="h5" component="h2">
-          {Name}
-        </ScenicSpotName>
+        <ScenicSpotTitle variant="h5" component="h2">
+          {ScenicSpotName}
+        </ScenicSpotTitle>
         {City && <ScenicSpotCity>{City}</ScenicSpotCity>}
         <ScenicSpotOpenTime>{OpenTime}</ScenicSpotOpenTime>
         <ScenicSpotDescriptionDetail>{DescriptionDetail}</ScenicSpotDescriptionDetail>
@@ -51,7 +51,7 @@ export default memo(Card, (
 ) => (prev.ID === next.ID) && (prev.UpdateTime === next.UpdateTime));
 
 Card.propTypes = {
-  Name: propTypes.string.isRequired,
+  ScenicSpotName: propTypes.string.isRequired,
   DescriptionDetail: propTypes.string.isRequired,
   Phone: propTypes.string.isRequired,
   Address: propTypes.string.isRequired,

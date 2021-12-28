@@ -2,7 +2,6 @@ import { ofType } from 'redux-observable';
 import {
   of,
   iif,
-  EMPTY,
   fromEvent,
 } from 'rxjs';
 import {
@@ -23,10 +22,10 @@ function detectStopScroll$({
 }) {
   return iif(
     () => state$.value.scenicSpot[scenicSpotType].noMoreScenicSpot,
-    EMPTY.pipe(map(stopScroll)),
+    of(stopScroll()),
     of(document.body.clientHeight === window.pageYOffset + window.innerHeight).pipe(
       filter((scrollToBottom) => scrollToBottom),
-      map(handleRequest),
+      map(() => handleRequest()),
     ),
   );
 }

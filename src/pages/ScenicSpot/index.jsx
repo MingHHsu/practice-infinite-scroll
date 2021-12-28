@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import propTypes from 'prop-types';
 import { startScroll, stopScroll } from 'store/slices/scroll';
 import {
-  selectAnotherCity,
   requestGetScenicSpot,
   requestGetScenicSpotByCity,
 } from 'store/slices/scenicSpot';
@@ -20,7 +19,7 @@ export default function ScenicSpotPage({
   const handleRequest = listByCity ? requestGetScenicSpotByCity : requestGetScenicSpot;
   const scenicSpot = useSelector((state) => state.scenicSpot[scenicSpotType].data);
   useEffect(() => {
-    if (scenicSpot.length === 0) dispatch(handleRequest());
+    if (scenicSpot.length === 0) dispatch(handleRequest({ city: city?.enName }));
   }, [scenicSpot]);
   useEffect(() => {
     dispatch(startScroll({
@@ -29,14 +28,11 @@ export default function ScenicSpotPage({
     }));
     return () => dispatch(stopScroll());
   }, [scenicSpotType, handleRequest]);
-  useEffect(() => {
-    if (listByCity) dispatch(selectAnotherCity({ city: city.enName }));
-  }, [city.enName]);
   return (
     <ScenicSpotContainer>
       <H2>{`${city?.twName || '全部'}景點列表`}</H2>
       <ScenicSpot.Group>
-        {scenicSpot.map((detail) => <ScenicSpot.Card key={detail.ID} {...detail} />)}
+        {scenicSpot.map((detail) => <ScenicSpot.Card key={detail.ScenicSpotID} {...detail} />)}
       </ScenicSpot.Group>
     </ScenicSpotContainer>
   );
