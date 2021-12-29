@@ -66,7 +66,7 @@ const { actions, reducer } = createSlice({
       return mergeDeepRight(state, {
         getScenicSpotByCity: {
           isRequesting: true,
-          city: action.payload.city,
+          city: action.payload?.city || state.getScenicSpotByCity.city,
         },
       });
     },
