@@ -19,15 +19,15 @@ export default function ScenicSpotPage({
   const handleRequest = listByCity ? requestGetScenicSpotByCity : requestGetScenicSpot;
   const scenicSpot = useSelector((state) => state.scenicSpot[scenicSpotType].data);
   useEffect(() => {
-    if (scenicSpot.length === 0) dispatch(handleRequest({ city: city?.enName }));
-  }, [scenicSpot]);
-  useEffect(() => {
     dispatch(startScroll({
       scenicSpotType,
       handleRequest,
     }));
     return () => dispatch(stopScroll());
   }, [scenicSpotType, handleRequest]);
+  useEffect(() => {
+    if (scenicSpot.length === 0) dispatch(handleRequest({ city: city?.enName }));
+  }, [scenicSpot]);
   return (
     <ScenicSpotContainer>
       <H2>{`${city?.twName || '全部'}景點列表`}</H2>
